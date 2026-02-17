@@ -7,10 +7,15 @@ const keyboardLayout = [
     ['z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/']
 ];
 
-const KeyboardHeatmap = ({ weakKeys }) => {
+const KeyboardHeatmap = ({ weakKeys, currentKey }) => {
     const maxErrors = Math.max(...Object.values(weakKeys), 1);
 
     const getKeyColor = (key) => {
+        // Highlight active key
+        if (currentKey && key.toLowerCase() === currentKey.toLowerCase()) {
+            return 'bg-sky-500 text-white shadow-[0_0_15px_rgba(14,165,233,0.6)] scale-110 z-10';
+        }
+
         const count = weakKeys[key] || 0;
         if (count === 0) return 'bg-slate-700 text-slate-400';
 
@@ -36,13 +41,16 @@ const KeyboardHeatmap = ({ weakKeys }) => {
                     ))}
                 </div>
             ))}
-            <div className="flex gap-4 mt-4 text-xs text-slate-500">
-                <span className="flex items-center gap-1"><span className="w-3 h-3 bg-slate-700 rounded-full"></span> Safe</span>
-                <span className="flex items-center gap-1"><span className="w-3 h-3 bg-yellow-500/50 rounded-full"></span> Warm</span>
-                <span className="flex items-center gap-1"><span className="w-3 h-3 bg-rose-600 rounded-full"></span> Hot</span>
+            <div className="flex gap-4 mt-4 text-xs text-slate-500 select-none">
+                <span className="flex items-center gap-1 cursor-help" title="Keys you rarely mistype"><span className="w-3 h-3 bg-slate-700 rounded-full"></span> Safe</span>
+                <span className="flex items-center gap-1 cursor-help" title="The key you need to press right now"><span className="w-3 h-3 bg-sky-500 rounded-full shadow-[0_0_5px_rgba(14,165,233,0.6)]"></span> Next</span>
+                <span className="flex items-center gap-1 cursor-help" title="Keys with occasional errors"><span className="w-3 h-3 bg-yellow-500/50 rounded-full"></span> Warm</span>
+                <span className="flex items-center gap-1 cursor-help" title="Keys with frequent errors"><span className="w-3 h-3 bg-orange-500/70 rounded-full"></span> Mod.</span>
+                <span className="flex items-center gap-1 cursor-help" title="Keys with very high error rate"><span className="w-3 h-3 bg-rose-600 rounded-full"></span> Hot</span>
             </div>
         </div>
     );
 };
+
 
 export default KeyboardHeatmap;

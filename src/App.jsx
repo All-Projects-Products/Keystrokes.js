@@ -178,7 +178,7 @@ function App() {
                         <Hands currentKey={nextChar} />
                     </div>
                     <div className="flex-1 w-full">
-                        <KeyboardHeatmap weakKeys={weakKeys} />
+                        <KeyboardHeatmap weakKeys={weakKeys} currentKey={nextChar} />
                     </div>
                 </div>
             </div>
