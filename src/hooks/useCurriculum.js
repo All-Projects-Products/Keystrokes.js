@@ -76,6 +76,8 @@ const useCurriculum = () => {
                 if (speedTestsUnlocked <= speedTestIndex + 1) {
                     setSpeedTestsUnlocked(prev => Math.max(prev, speedTestIndex + 2)); // unlock index + 2 (conceptually)
                 }
+                // Auto-advance to next test [FIX]
+                setSpeedTestIndex(prev => prev + 1);
             }
 
             // Update PB

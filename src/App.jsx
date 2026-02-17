@@ -92,6 +92,10 @@ function App() {
                 stats={{ wpm, accuracy, errors, strokes: totalTyped }}
                 personalBest={mode === 'curriculum' ? currentPersonalBest : currentSpeedTestPB}
                 threshold={mode === 'curriculum' ? 90 : (currentSpeedTest?.threshold?.accuracy || 90)}
+                requirements={mode === 'curriculum'
+                    ? { accuracy: 90, wpm: 0 }
+                    : (currentSpeedTest?.threshold || { accuracy: 90, wpm: 0 })
+                }
                 onRetry={handleRetry}
                 onNext={handleNextLesson}
             />

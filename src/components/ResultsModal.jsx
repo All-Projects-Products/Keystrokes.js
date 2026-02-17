@@ -3,7 +3,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw, ArrowRight, XCircle, CheckCircle } from 'lucide-react';
 
-const ResultsModal = ({ isOpen, stats, personalBest, threshold = 90, onRetry, onNext, isLastLesson }) => {
+const ResultsModal = ({ isOpen, stats, personalBest, threshold = 90, requirements, onRetry, onNext, isLastLesson }) => {
     const { wpm, accuracy, errors } = stats;
     const passed = accuracy >= threshold;
     const previousBestWPM = personalBest?.wpm || 0;
@@ -49,9 +49,9 @@ const ResultsModal = ({ isOpen, stats, personalBest, threshold = 90, onRetry, on
                             {passed ? "Great job! Ready for the next challenge?" : "Accuracy too low. Keep practicing!"}
                         </p>
 
-                        <div className="grid grid-cols-3 gap-4 mb-8">
+                        <div className="grid grid-cols-3 gap-4 mb-6">
                             <div className="p-4 bg-slate-700/50 rounded-xl relative overflow-hidden">
-                                <div className="text-3xl font-bold text-white">{wpm}</div>
+                                <div className={`text-3xl font-bold ${requirements?.wpm && wpm < requirements.wpm ? 'text-rose-400' : 'text-white'}`}>{wpm}</div>
                                 <div className="text-xs uppercase tracking-widest text-slate-500">WPM</div>
                                 {previousBestWPM > 0 && (
                                     <div className="text-[10px] text-slate-500 mt-1">
@@ -69,7 +69,22 @@ const ResultsModal = ({ isOpen, stats, personalBest, threshold = 90, onRetry, on
                             </div>
                         </div>
 
-                        <div className="flex gap-4 justify-center">
+                        {/* Requirements Section */}
+                        <div className="mb-8 p-3 bg-slate-700/30 rounded-lg border border-slate-700">
+                            <h3 className="text-xs uppercase tracking-widest text-slate-400 mb-2">Requirements</h3>
+                            <div className="flex justify-center gap-6 text-sm">
+                                <div className={`flex items-center gap-2 ${requirements?.wpm && wpm < requirements.wpm ? 'text-rose-400' : 'text-emerald-400'}`}>
+                                    <span>{requirements?.wpm || 0} WPM</span>
+                                    {requirements?.wpm && wpm < requirements.wpm ? <XCircle size={14} /> : <CheckCircle size={14} />}
+                                </div>
+                                <div className={`flex items-center gap-2 ${accuracy < threshold ? 'text-rose-400' : 'text-emerald-400'}`}>
+                                    <span>{threshold}% Acc</span>
+                                    {accuracy < threshold ? <XCircle size={14} /> : <CheckCircle size={14} />}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex gap-4 justify-center mb-6">
                             <button
                                 onClick={onRetry}
                                 className="flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
@@ -83,15 +98,15 @@ const ResultsModal = ({ isOpen, stats, personalBest, threshold = 90, onRetry, on
                                     onClick={onNext}
                                     className="flex items-center gap-2 px-6 py-3 rounded-lg font-bold bg-emerald-500 text-white hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 transition-transform hover:scale-105"
                                 >
-                                    Next Lesson
+                                    Next Challenge
                                     <ArrowRight size={20} />
                                 </button>
                             )}
                         </div>
 
                         {!passed && (
-                            <div className="mt-6 text-xs text-rose-400/80">
-                  Must achieve >{threshold}% accuracy to advance.
+                            <div className="text-xs text-rose-400/80 mb-6">
+                                Must achieve goals to advance.
                             </div>
                         )}
                     </motion.div>
