@@ -5,7 +5,11 @@ import { RefreshCw, ArrowRight, XCircle, CheckCircle } from 'lucide-react';
 
 const ResultsModal = ({ isOpen, stats, personalBest, threshold = 90, requirements, onRetry, onNext, isLastLesson }) => {
     const { wpm, accuracy, errors } = stats;
-    const passed = accuracy >= threshold;
+
+    // Check both accuracy and WPM requirements if they exist
+    const passed = accuracy >= (requirements?.accuracy || threshold) &&
+        wpm >= (requirements?.wpm || 0);
+
     const previousBestWPM = personalBest?.wpm || 0;
     const isNewRecord = passed && wpm > previousBestWPM;
 
