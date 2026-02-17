@@ -34,6 +34,11 @@ const useTypingEngine = (text) => {
         // Ignore non-character keys
         if (key.length > 1 && key !== "Backspace") return;
 
+        // Prevent default browser behavior (scrolling on Space, etc.)
+        if (key === " " || key.length === 1 || key === "Backspace") {
+            e.preventDefault();
+        }
+
         if (!startTime) {
             setStartTime(Date.now());
         }

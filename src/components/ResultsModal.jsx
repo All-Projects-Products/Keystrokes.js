@@ -1,5 +1,3 @@
-
-import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw, ArrowRight, XCircle, CheckCircle } from 'lucide-react';
 
