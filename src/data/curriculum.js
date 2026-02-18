@@ -57,23 +57,23 @@ export const curriculum = {
         },
         {
             id: "programmingQuotes",
-            title: "Programming Quotes",
-            quotes: [
-                "Talk is cheap. Show me the code.",
-                "Programs must be written for people to read, and only incidentally for machines to execute.",
-                "Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.",
-                "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
-                "First, solve the problem. Then, write the code.",
-                "Experience is the name everyone gives to their mistakes.",
-                "In order to be irreplaceable, one must always be different.",
-                "Java is to JavaScript what car is to Carpet.",
-                "Knowledge is power.",
-                "Code is like humor. When you have to explain it, it’s bad.",
-                "Fix the cause, not the symptom.",
-                "Optimism is an occupational hazard of programming: feedback is the treatment.",
-                "Simplicity is the soul of efficiency.",
-                "Before software can be reusable it first has to be usable.",
-                "Make it work, make it right, make it fast."
+            title: "Programming Quotes (Bonus)",
+            lessons: [
+                { id: "quote-1", title: "Talk is cheap...", content: "Linus Torvalds", keys: [], text: "Talk is cheap. Show me the code." },
+                { id: "quote-2", title: "Programs for people", content: "Harold Abelson", keys: [], text: "Programs must be written for people to read, and only incidentally for machines to execute." },
+                { id: "quote-3", title: "Violent Psychopath", content: "John Woods", keys: [], text: "Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live." },
+                { id: "quote-4", title: "Humans can understand", content: "Martin Fowler", keys: [], text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand." },
+                { id: "quote-5", title: "Solve first", content: "John Johnson", keys: [], text: "First, solve the problem. Then, write the code." },
+                { id: "quote-6", title: "Experience & Mistakes", content: "Oscar Wilde", keys: [], text: "Experience is the name everyone gives to their mistakes." },
+                { id: "quote-7", title: "Irreplaceable", content: "Coco Chanel", keys: [], text: "In order to be irreplaceable, one must always be different." },
+                { id: "quote-8", title: "Java vs JavaScript", content: "Jeremy Keith", keys: [], text: "Java is to JavaScript what car is to Carpet." },
+                { id: "quote-9", title: "Knowledge is power", content: "Francis Bacon", keys: [], text: "Knowledge is power." },
+                { id: "quote-10", title: "Code like humor", content: "Cory House", keys: [], text: "Code is like humor. When you have to explain it, it’s bad." },
+                { id: "quote-11", title: "Cause not symptom", content: "Steve McConnell", keys: [], text: "Fix the cause, not the symptom." },
+                { id: "quote-12", title: "Optimism hazard", content: "Kent Beck", keys: [], text: "Optimism is an occupational hazard of programming: feedback is the treatment." },
+                { id: "quote-13", title: "Simplicity", content: "Austin Freeman", keys: [], text: "Simplicity is the soul of efficiency." },
+                { id: "quote-14", title: "Usable software", content: "Ralph Johnson", keys: [], text: "Before software can be reusable it first has to be usable." },
+                { id: "quote-15", title: "Make it right", content: "Kent Beck", keys: [], text: "Make it work, make it right, make it fast." }
             ]
         }
     ],

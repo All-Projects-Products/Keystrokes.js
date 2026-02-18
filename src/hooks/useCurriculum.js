@@ -18,7 +18,8 @@ const useCurriculum = () => {
 
     const [unlocked, setUnlocked] = useState(() => {
         const saved = localStorage.getItem(STORAGE_KEY);
-        return saved ? JSON.parse(saved).unlocked || { phase1: true } : { phase1: true };
+        const defaultUnlocked = { phase1: true, programmingQuotes: true };
+        return saved ? { ...defaultUnlocked, ...JSON.parse(saved).unlocked } : defaultUnlocked;
     });
 
     const [personalBests, setPersonalBests] = useState(() => {
