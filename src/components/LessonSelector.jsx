@@ -13,6 +13,25 @@ const LessonSelector = ({
     onSelectPhase,
     onSelectLesson
 }) => {
+    const [expandedPhases, setExpandedPhases] = React.useState({});
+
+    React.useEffect(() => {
+        // Automatically expand the current phase
+        if (isOpen) {
+            setExpandedPhases(prev => ({
+                ...prev,
+                [currentPhaseIndex]: true
+            }));
+        }
+    }, [isOpen, currentPhaseIndex]);
+
+    const togglePhase = (pIndex) => {
+        setExpandedPhases(prev => ({
+            ...prev,
+            [pIndex]: !prev[pIndex]
+        }));
+    };
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -38,49 +57,68 @@ const LessonSelector = ({
                             <button onClick={onClose} className="text-slate-500 hover:text-white">✕</button>
                         </div>
 
-                        <div className="space-y-8">
+                        <div className="space-y-4">
                             {curriculum.phases.map((phase, pIndex) => {
                                 if (!phase.lessons) return null;
 
                                 const isUnlocked = unlocked[phase.id] || pIndex === 0;
                                 const isActivePhase = pIndex === currentPhaseIndex;
+                                const isExpanded = expandedPhases[pIndex];
 
                                 return (
                                     <div key={phase.id} className={`transition-opacity ${isUnlocked ? 'opacity-100' : 'opacity-50 grayscale'}`}>
                                         <h3
-                                            className="text-sm uppercase tracking-widest font-bold text-slate-500 mb-3 flex items-center gap-2 cursor-pointer hover:text-emerald-300 transition-colors"
-                                            onClick={() => isUnlocked && onSelectPhase(pIndex)}
+                                            className="text-sm uppercase tracking-widest font-bold text-slate-400 mb-2 flex items-center justify-between p-2 rounded-lg cursor-pointer hover:bg-slate-800 hover:text-emerald-300 transition-colors"
+                                            onClick={() => isUnlocked && togglePhase(pIndex)}
                                         >
-                                            {phase.title}
-                                            {!isUnlocked && <Lock size={12} />}
+                                            <span className="flex items-center gap-2">
+                                                {phase.title}
+                                                {!isUnlocked && <Lock size={12} />}
+                                            </span>
+                                            {isUnlocked && (
+                                                <span className={`transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
+                                                    ▼
+                                                </span>
+                                            )}
                                         </h3>
 
-                                        <div className="space-y-2 pl-2 border-l border-slate-800">
-                                            {phase.lessons.map((lesson, lIndex) => {
-                                                const isActive = isActivePhase && lIndex === currentLessonIndex;
+                                        <AnimatePresence>
+                                            {isExpanded && (
+                                                <motion.div 
+                                                    initial={{ height: 0, opacity: 0 }}
+                                                    animate={{ height: 'auto', opacity: 1 }}
+                                                    exit={{ height: 0, opacity: 0 }}
+                                                    className="overflow-hidden"
+                                                >
+                                                    <div className="space-y-1 pl-4 py-2 border-l-2 border-slate-800 ml-2">
+                                                        {phase.lessons.map((lesson, lIndex) => {
+                                                            const isActive = isActivePhase && lIndex === currentLessonIndex;
 
-                                                return (
-                                                    <button
-                                                        key={lesson.id}
-                                                        disabled={!isUnlocked}
-                                                        onClick={() => {
-                                                            onSelectPhase(pIndex); // Ensure phase switches too
-                                                            onSelectLesson(lIndex);
-                                                            onClose();
-                                                        }}
-                                                        className={`w-full text-left px-3 py-2 rounded-md text-sm transition-all flex items-center justify-between group
-                              ${isActive
-                                                                ? 'bg-emerald-500/10 text-emerald-400 font-bold border border-emerald-500/50'
-                                                                : 'text-slate-400 hover:bg-slate-800 hover:text-white'
-                                                            }
-                            `}
-                                                    >
-                                                        <span className="truncate">{lesson.title}</span>
-                                                        {isActive && <Play size={12} className="fill-current" />}
-                                                    </button>
-                                                );
-                                            })}
-                                        </div>
+                                                            return (
+                                                                <button
+                                                                    key={lesson.id}
+                                                                    disabled={!isUnlocked}
+                                                                    onClick={() => {
+                                                                        onSelectPhase(pIndex); // Ensure phase switches too
+                                                                        onSelectLesson(lIndex);
+                                                                        onClose();
+                                                                    }}
+                                                                    className={`w-full text-left px-3 py-2 rounded-md text-sm transition-all flex items-center justify-between group
+                                          ${isActive
+                                                                            ? 'bg-emerald-500/10 text-emerald-400 font-bold border border-emerald-500/50'
+                                                                            : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                                                                        }
+                                        `}
+                                                                >
+                                                                    <span className="truncate">{lesson.title}</span>
+                                                                    {isActive && <Play size={12} className="fill-current" />}
+                                                                </button>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
                                     </div>
                                 );
                             })}

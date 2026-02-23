@@ -17,6 +17,7 @@ function App() {
         currentPhase,
         currentLesson,
         completeLesson,
+        updateStats,
         currentPersonalBest,
         unlocked,
         phaseIndex,
@@ -45,42 +46,32 @@ function App() {
     // Ghost Settings
     const [ghostWPM, setGhostWPM] = useState(40);
 
-    // Initialize Test Mode - This useEffect is no longer needed as testText state is removed
-    // useEffect(() => {
-    //     if (mode === 'test' && !testText) {
-    //         const quotes = curriculum.phases.find(p => p.id === 'programmingQuotes')?.quotes || ["Error loading quotes"];
-    //         const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-    //         setTestText(randomQuote);
-    //     }
-    // }, [mode, testText]);
-
     // Key Event Listener
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [handleKeyDown]);
 
-    // Completion Logic is now handled via UI (ResultsModal)
-
-    // startNewTest is no longer needed as testText state is removed and currentSpeedTest provides text
-    // const startNewTest = () => {
-    //     const quotes = curriculum.phases.find(p => p.id === 'programmingQuotes')?.quotes || ["Error loading quotes"];
-    //     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-    //     setTestText(randomQuote);
-    // };
-
     const nextChar = activeText[cursor] || "";
 
     const handleNextLesson = () => {
         if (mode === 'curriculum') {
+            updateStats({ wpm, accuracy, errors, weakKeys }, false);
             completeLesson({ wpm, accuracy, errors, weakKeys });
         } else {
+            updateStats({ wpm, accuracy, errors }, true);
             completeSpeedTest({ wpm, accuracy, errors });
         }
         reset();
     };
 
     const handleRetry = () => {
+        // Save PB even on retry
+        if (mode === 'curriculum') {
+            updateStats({ wpm, accuracy, errors, weakKeys }, false);
+        } else {
+            updateStats({ wpm, accuracy, errors }, true);
+        }
         reset();
     };
 

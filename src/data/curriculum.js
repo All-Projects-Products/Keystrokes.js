@@ -1,4 +1,3 @@
-
 export const curriculum = {
     phases: [
         {
@@ -9,7 +8,9 @@ export const curriculum = {
                 { id: "1.2", title: "Home Row Reaches", content: "g h", keys: ["g", "h"], text: "fgjh fgjh ghgh fghj g h g h" },
                 { id: "1.3", title: "Coordination Drill", content: "Home Row + G/H", keys: ["a", "s", "d", "f", "g", "h", "j", "k", "l", ";"], text: "asdfgh hjkl; asdfgh hjkl;" },
                 { id: "1.4", title: "Confusion Clear (F vs J)", content: "F vs J Focus", keys: ["f", "j"], text: "fjf jfj ffjj jjff f j j f" },
-                { id: "1.5", title: "Speed Sprint: Easy Words", content: "High Speed", keys: [], text: "sad dad lad fad ask fall all lass", isDrill: true }
+                { id: "1.5", title: "The 'H' and 'G' Stretch", content: "Index reach", keys: ["g", "h", "f", "j"], text: "high fish glad hash flash flags gash glass" },
+                { id: "1.6", title: "Pinky & Ring Stability", content: "A and ; focus", keys: ["a", ";", "s", "l"], text: "asks salad salsa slash salad falls glass lads" },
+                { id: "1.7", title: "Speed Sprint: Easy Words", content: "High Speed", keys: [], text: "sad dad lad fad ask fall all lass", isDrill: true }
             ]
         },
         {
@@ -19,8 +20,9 @@ export const curriculum = {
                 { id: "2.1", title: "Vowels & High Frequency", content: "e i r u", keys: ["e", "i", "r", "u"], text: "eire uri erui ieie urur" },
                 { id: "2.2", title: "Remaining Top Row", content: "q w t y o p", keys: ["q", "w", "t", "y", "o", "p"], text: "qwerty uiop qwerty uiop" },
                 { id: "2.3", title: "Confusion Clear (U vs Y)", content: "U vs Y Focus", keys: ["u", "y"], text: "uyuy uyu uuyu yyuu u y u y" },
-                { id: "2.4", title: "Confusion Clear (R vs T)", content: "R vs T Focus", keys: ["r", "t"], text: "rtrt trtr rrtt trtr r t r t" },
-                { id: "2.5", title: "Pinky Challenge", content: "q p a ; z /", keys: ["q", "p", "a", ";", "z", "/"], text: "qa z/ p; qa z/ p; zap zip quip" }
+                { id: "2.4", title: "Top Row Left Hand", content: "q w e r t", keys: ["q", "w", "e", "r", "t"], text: "tree water tweet wetter reread wedge reef" },
+                { id: "2.5", title: "Top Row Right Hand", content: "y u i o p", keys: ["y", "u", "i", "o", "p"], text: "you you're pilot priority policy poppy pulley" },
+                { id: "2.6", title: "Pinky Challenge", content: "q p a ; z /", keys: ["q", "p", "a", ";", "z", "/"], text: "qa z/ p; qa z/ p; zap zip quip" }
             ]
         },
         {
@@ -30,8 +32,9 @@ export const curriculum = {
                 { id: "3.1", title: "Basic Bottom Row", content: "v m c , x .", keys: ["v", "m", "c", ",", "x", "."], text: "vmc,x. vmc,x. v m c , x ." },
                 { id: "3.2", title: "The Outer Keys", content: "z / b n", keys: ["z", "/", "b", "n"], text: "z/bn z/bn zz // bb nn" },
                 { id: "3.3", title: "Confusion Clear (V vs B)", content: "V vs B Focus", keys: ["v", "b"], text: "vbvb bvbv vbbv v b v b" },
-                { id: "3.4", title: "Confusion Clear (N vs M)", content: "N vs M Focus", keys: ["n", "m"], text: "nmnm mnmn nnmm n m n m" },
-                { id: "3.5", title: "Speed Sprint: Common Words", content: "Mix", keys: [], text: "the and for are but not you all any can had has him his how man new now old see two way who" }
+                { id: "3.4", title: "The 'C' and 'M' Reach", content: "Middle finger down", keys: ["c", "m"], text: "come calm ceramic comic camera mimic mice" },
+                { id: "3.5", title: "Bottom Row Fluidity", content: "z x c v b n m", keys: ["z", "x", "c", "v", "b", "n", "m"], text: "zinc basic voice become member number convex" },
+                { id: "3.6", title: "Speed Sprint: Common Words", content: "Mix", keys: [], text: "the and for are but not you all any can had has him his how man new now old see two way who" }
             ]
         },
         {
@@ -40,9 +43,10 @@ export const curriculum = {
             lessons: [
                 { id: "4.1", title: "Number Row Left", content: "1 2 3 4 5", keys: ["1", "2", "3", "4", "5"], text: "12345 54321 1 2 3 4 5" },
                 { id: "4.2", title: "Number Row Right", content: "6 7 8 9 0", keys: ["6", "7", "8", "9", "0"], text: "67890 09876 6 7 8 9 0" },
-                { id: "4.3", title: "Basic Punctuation", content: ". , / ; '", keys: [".", ",", "/", ";", "'"], text: ".,/;'. , / ; '" },
-                { id: "4.4", title: "Advanced Symbols", content: "! @ # $ % ^ & * ( ) _ +", keys: ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+"], text: "!@#$% ^&*()_+" },
-                { id: "4.5", title: "Developer Special", content: "{ } [ ] < > | \\ / =>", keys: ["{", "}", "[", "]", "<", ">", "|", "\\", "/", "=", ">"], text: "{} [] <> | \\ / =>" }
+                { id: "4.3", title: "Logic & Comparison", content: "&& || != ==", keys: ["&", "|", "!", "="], text: "if (a == b && c != d) || (x <= y)" },
+                { id: "4.4", title: "JSON & Objects", content: "{ } : \" ,", keys: ["{", "}", ":", "\"", ","], text: "{\"id\": 1, \"name\": \"User\", \"active\": true}" },
+                { id: "4.5", title: "Template Literals", content: "` $ { }", keys: ["`", "$", "{", "}"], text: "const url = `${baseUrl}/api/${id}`;" },
+                { id: "4.6", title: "Developer Special", content: "{ } [ ] < > | \\ / =>", keys: ["{", "}", "[", "]", "<", ">", "|", "\\", "/", "=", ">"], text: "{} [] <> | \\ / =>" }
             ]
         },
         {
@@ -50,9 +54,10 @@ export const curriculum = {
             title: "Phase 5: Sentences & Flow",
             lessons: [
                 { id: "5.1", title: "Common English Words", content: "High frequency words", keys: [], text: "the and this that with you are not have" },
-                { id: "5.2", title: "Capitalization", content: "Shift keys usage", keys: [], text: "The Quick Brown Fox Jumps Over The Lazy Dog" },
-                { id: "5.3", title: "Short Sentences", content: "Sentences with punctuation", keys: [], text: "Hello, world. This is a typing test. React is awesome." },
-                { id: "5.4", title: "Speed Sprint: Final Exam", content: "Go Fast", keys: [], text: "fast quick zoom speed rush dash run fly jet race win top best" }
+                { id: "5.2", title: "React Hook Flow", content: "Coding sentences", keys: [], text: "useState and useEffect are essential React hooks for state management." },
+                { id: "5.3", title: "Async/Await Pattern", content: "Coding sentences", keys: [], text: "async function fetchData() { const res = await fetch(url); }" },
+                { id: "5.4", title: "Terminal Commands", content: "CLI practice", keys: [], text: "git add . && git commit -m 'feat: update typing lessons'" },
+                { id: "5.5", title: "Speed Sprint: Final Exam", content: "Go Fast", keys: [], text: "fast quick zoom speed rush dash run fly jet race win top best" }
             ]
         },
         {
@@ -73,7 +78,7 @@ export const curriculum = {
                 { id: "quote-12", title: "Optimism hazard", content: "Kent Beck", keys: [], text: "Optimism is an occupational hazard of programming: feedback is the treatment." },
                 { id: "quote-13", title: "Simplicity", content: "Austin Freeman", keys: [], text: "Simplicity is the soul of efficiency." },
                 { id: "quote-14", title: "Usable software", content: "Ralph Johnson", keys: [], text: "Before software can be reusable it first has to be usable." },
-                { id: "quote-15", title: "Make it right", content: "Kent Beck", keys: [], text: "Make it work, make it right, make it fast." }
+                { id: "quote-15", title: "Make it work", content: "Kent Beck", keys: [], text: "Make it work, make it right, make it fast." }
             ]
         }
     ],

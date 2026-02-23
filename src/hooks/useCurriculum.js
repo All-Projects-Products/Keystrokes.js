@@ -80,15 +80,6 @@ const useCurriculum = () => {
                 // Auto-advance to next test [FIX]
                 setSpeedTestIndex(prev => prev + 1);
             }
-
-            // Update PB
-            setSpeedPersonalBests(prev => {
-                const currentPB = prev[test.id]?.wpm || 0;
-                if (wpm > currentPB) {
-                    return { ...prev, [test.id]: { wpm, accuracy, date: Date.now() } };
-                }
-                return prev;
-            });
         }
     }, [speedTestIndex, speedTestsUnlocked]);
 
@@ -127,17 +118,6 @@ const useCurriculum = () => {
         }
 
         if (drillTriggered) return;
-
-        // Update PB if better
-        if (accuracy > 90) { // Only valid runs count
-            setPersonalBests(prev => {
-                const currentPB = prev[currentLesson.id]?.wpm || 0;
-                if (wpm > currentPB) {
-                    return { ...prev, [currentLesson.id]: { wpm, accuracy, date: Date.now() } };
-                }
-                return prev;
-            });
-        }
 
         // Clear drill if active
         if (confusionDrill) {
@@ -183,10 +163,36 @@ const useCurriculum = () => {
         }
     };
 
+    const updateStats = useCallback((stats, isSpeedTest) => {
+        const { wpm, accuracy } = stats;
+
+        if (isSpeedTest) {
+            const test = curriculum.speedChallenges[speedTestIndex];
+            setSpeedPersonalBests(prev => {
+                const currentPB = prev[test.id]?.wpm || 0;
+                if (wpm > currentPB) {
+                    return { ...prev, [test.id]: { wpm, accuracy, date: Date.now() } };
+                }
+                return prev;
+            });
+        } else {
+            if (accuracy > 90) {
+                setPersonalBests(prev => {
+                    const currentPB = prev[currentLesson.id]?.wpm || 0;
+                    if (wpm > currentPB) {
+                        return { ...prev, [currentLesson.id]: { wpm, accuracy, date: Date.now() } };
+                    }
+                    return prev;
+                });
+            }
+        }
+    }, [speedTestIndex, currentLesson?.id]);
+
     return {
         currentPhase,
         currentLesson,
         completeLesson,
+        updateStats,
         unlocked,
         currentPersonalBest,
         phaseIndex,
